@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Calculate Deposit</title>
+</head>
+<body>
+<h1>예금 계산기</h1>
+<form action="#" th:action="@{/calculateDeposit}" th:object="${deposit}" method="post">
+    <label>Principal Amount: <input type="text" th:field="*{amount}" /></label><br/>
+    <label>Annual Interest Rate (%): <input type="text" th:field="*{interestRate}" /></label><br/>
+    <label>Number of Years: <input type="text" th:field="*{term}" /></label><br/>
+
+    <button type="submit">Calculate</button>
+</form>
+</body>
+</html>
