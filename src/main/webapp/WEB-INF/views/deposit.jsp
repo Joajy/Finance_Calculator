@@ -19,16 +19,16 @@
 </head>
 <body>
 <div id="sidebar" class="bg-light p-3">
-  <h3>Sidebar</h3>
+  <h3>Menu</h3>
   <ul class="nav flex-column">
     <li class="nav-item">
-      <a class="nav-link active" href="#">Home</a>
+      <a class="nav-link active" href="/deposit">Deposit</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">About</a>
+      <a class="nav-link" href="/saving">Saving</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Contact</a>
+      <a class="nav-link" href="/loan">Loan</a>
     </li>
   </ul>
 </div>
@@ -44,7 +44,7 @@
       <input type="text" class="form-control" id="interestRate" name="interestRate">
     </div>
     <div class="mb-3">
-      <label for="term" class="form-label">Number of Years</label>
+      <label for="term" class="form-label">Number of Months</label>
       <input type="text" class="form-control" id="term" name="term">
     </div>
     <div class="mb-3">
@@ -58,7 +58,7 @@
   </form>
   <div id="result" class="mt-3">
     <!-- Calculation result will be displayed here -->
-    <p>??</p>
+    <p></p>
   </div>
 </div>
 
@@ -75,7 +75,7 @@
       };
       $.ajax({
         type: 'POST',
-        url: '/calculateDeposit',
+        url: '/deposit/calculate',
         contentType: 'application/json',
         data: JSON.stringify(formData),
         success: function(result) {

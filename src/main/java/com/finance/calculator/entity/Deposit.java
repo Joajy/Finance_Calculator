@@ -3,8 +3,7 @@ package com.finance.calculator.entity;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Getter @Setter
 public class Deposit {
 
     private long amount;
