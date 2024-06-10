@@ -51,13 +51,17 @@
       <label for="interestIncome" class="form-label">Interest Income</label>
       <select class="form-select" id="interestIncome" name="interestIncome">
         <%--  일반 과세, 세금 우대   --%>
-        <option value="normal">General Taxation</option>
-        <option value="preferential">Tax Break</option>
+        <option value="General Taxation">General Taxation</option>
+        <option value="Tax Break">Tax Break</option>
       </select>
     </div>
     <button type="submit" class="btn btn-primary">Calculate</button>
   </form>
-  <div id="result" class="mt-3">
+  <div id="beforeResult" class="mt-3">
+    <!-- Calculation result will be displayed here -->
+    <p></p>
+  </div>
+  <div id="afterResult" class="mt-3">
     <!-- Calculation result will be displayed here -->
     <p></p>
   </div>
@@ -76,16 +80,30 @@
       };
       $.ajax({
         type: 'POST',
-        url: '/saving/calculate',
+        url: '/saving/beforeCalculate',
         contentType: 'application/json',
         data: JSON.stringify(formData),
         success: function(result) {
-          $('#result').html('<p>Final Amount: ' + result + '</p>');
+          $('#beforeResult').html('<br>' + '<p>Tax Type: ' + formData.interestIncome.valueOf() + '</p>' +
+                  '<p>Before Amount: ' + result + '</p>');
         },
         error: function(error) {
-          $('#result').html('<p>An error occurred</p>');
+          $('#beforeResult').html('<p>An error occurred</p>');
         }
       });
+      $.ajax({
+        type: 'POST',
+        url: '/saving/afterCalculate',
+        contentType: 'application/json',
+        data: JSON.stringify(formData),
+        success: function(result) {
+          $('#afterResult').html('<p>After Amount: ' + result + '</p>');
+        },
+        error: function(error) {
+          $('#afterResult').html('<p>An error occurred</p>');
+        }
+      });
+
     });
   });
 </script>
