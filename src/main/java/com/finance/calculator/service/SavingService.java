@@ -16,7 +16,7 @@ public class SavingService {
     public String calculateBeforeSaving(Saving saving) {
         double principal = saving.getAmount();
         double rate = saving.getInterestRate() / 100;
-        int year = saving.getTerm();
+        int year = saving.getYear();
         String interestType = saving.getInterestType();
         long total = (long) (principal
                 * appliedInterest(interestType, rate, year)
@@ -27,7 +27,7 @@ public class SavingService {
     public String calculateAfterSaving(Saving saving) {
         double principal = saving.getAmount();
         double rate = saving.getInterestRate() / 100;
-        int year = saving.getTerm();
+        int year = saving.getYear();
         String interestIncome = saving.getInterestIncome();
         String interestType = saving.getInterestType();
         long total = (long) (principal

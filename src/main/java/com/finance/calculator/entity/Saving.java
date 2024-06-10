@@ -7,7 +7,7 @@ import lombok.Setter;
 public class Saving {
 
     private long amount;
-    private int term;
+    private int year;
     private double interestRate;
     private String interestType;
     private String interestIncome;
