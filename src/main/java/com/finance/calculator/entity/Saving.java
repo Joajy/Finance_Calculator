@@ -9,4 +9,5 @@ public class Saving {
     private long amount;
     private int term;
     private double interestRate;
+    private String interestIncome;
 }

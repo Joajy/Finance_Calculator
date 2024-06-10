@@ -1,6 +1,6 @@
 package com.finance.calculator.service;
 
-import com.finance.calculator.entity.Deposit;
+import com.finance.calculator.constant.InterestIncome;
 import com.finance.calculator.entity.Saving;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +11,11 @@ public class SavingService {
         double principal = saving.getAmount();
         double rate = saving.getInterestRate() / 100;
         int term = saving.getTerm();
-        return principal * Math.pow(1 + rate, term);
+        String interestIncome = saving.getInterestIncome();
+        return (long)(
+                principal
+                * Math.pow(1 + rate, term)
+                * InterestIncome.type(interestIncome)
+        );
     }
 }

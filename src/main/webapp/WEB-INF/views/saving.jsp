@@ -47,6 +47,14 @@
       <label for="term" class="form-label">Number of Months</label>
       <input type="text" class="form-control" id="term" name="term">
     </div>
+    <div class="mb-3">
+      <label for="interestIncome" class="form-label">Interest Income</label>
+      <select class="form-select" id="interestIncome" name="interestIncome">
+        <%--  일반 과세, 세금 우대   --%>
+        <option value="normal">General Taxation</option>
+        <option value="preferential">Tax Break</option>
+      </select>
+    </div>
     <button type="submit" class="btn btn-primary">Calculate</button>
   </form>
   <div id="result" class="mt-3">
@@ -63,7 +71,8 @@
       const formData = {
         amount: $('#amount').val(),
         interestRate: $('#interestRate').val(),
-        term: $('#term').val()
+        term: $('#term').val(),
+        interestIncome: $('#interestIncome').val()
       };
       $.ajax({
         type: 'POST',
