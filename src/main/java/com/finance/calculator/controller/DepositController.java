@@ -22,9 +22,15 @@ public class DepositController {
         return "deposit";
     }
 
-    @PostMapping("/calculate")
-    public ResponseEntity<Double> calculateDeposit(@RequestBody Deposit deposit) {
-        double money = depositService.calculateDeposit(deposit);
+    @PostMapping("/calculate/before")
+    public ResponseEntity<String> calculateBeforeDeposit(@RequestBody Deposit deposit) {
+        String money = depositService.calculateBeforeDeposit(deposit);
+        return ResponseEntity.status(HttpStatus.OK).body(money);
+    }
+
+    @PostMapping("/calculate/after")
+    public ResponseEntity<String> calculateAfterDeposit(@RequestBody Deposit deposit) {
+        String money = depositService.calculateAfterDeposit(deposit);
         return ResponseEntity.status(HttpStatus.OK).body(money);
     }
 }

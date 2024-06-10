@@ -54,9 +54,21 @@
         <option value="compound">Compound Interest</option>
       </select>
     </div>
+    <div class="mb-3">
+      <label for="interestIncome" class="form-label">Interest Income</label>
+      <select class="form-select" id="interestIncome" name="interestIncome">
+        <%--  일반 과세, 세금 우대   --%>
+        <option value="normal">General Taxation</option>
+        <option value="preferential">Tax Break</option>
+      </select>
+    </div>
     <button type="submit" class="btn btn-primary">Calculate</button>
   </form>
-  <div id="result" class="mt-3">
+  <div id="beforeResult" class="mt-3">
+    <!-- Calculation result will be displayed here -->
+    <p></p>
+  </div>
+  <div id="afterResult" class="mt-3">
     <!-- Calculation result will be displayed here -->
     <p></p>
   </div>
@@ -71,18 +83,31 @@
         amount: $('#amount').val(),
         interestRate: $('#interestRate').val(),
         term: $('#term').val(),
-        interestType: $('#interestType').val()
+        interestType: $('#interestType').val(),
+        interestIncome: $('#interestIncome').val()
       };
       $.ajax({
         type: 'POST',
-        url: '/deposit/calculate',
+        url: '/deposit/calculate/before',
         contentType: 'application/json',
         data: JSON.stringify(formData),
         success: function(result) {
-          $('#result').html('<p>Final Amount: ' + result + '</p>');
+          $('#beforeResult').html('<p>Before Amount: ' + result + '</p>');
         },
         error: function(error) {
-          $('#result').html('<p>An error occurred</p>');
+          $('#beforeResult').html('<p>An error occurred</p>');
+        }
+      });
+      $.ajax({
+        type: 'POST',
+        url: '/deposit/calculate/after',
+        contentType: 'application/json',
+        data: JSON.stringify(formData),
+        success: function(result) {
+          $('#afterResult').html('<p>After Amount: ' + result + '</p>');
+        },
+        error: function(error) {
+          $('#afterResult').html('<p>An error occurred</p>');
         }
       });
     });
