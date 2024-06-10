@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
 <head>
   <title>Calculate Deposit</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -34,7 +35,7 @@
 </div>
 <div class="container-fluid p-3">
   <h1>Calculate Deposit</h1>
-  <h2>목돈을 만들기 위해 일정 기간 동안 정해진 금액을 납입하는 방식입니다.</h2>
+  <h2>적금: 목돈을 만들기 위해 일정 기간 동안 정해진 금액을 납입하는 방식입니다.</h2>
   <form id="depositForm">
     <div class="mb-3">
       <label for="amount" class="form-label">Principal Amount</label>
