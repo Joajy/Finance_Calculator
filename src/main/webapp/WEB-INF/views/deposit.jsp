@@ -34,6 +34,7 @@
 </div>
 <div class="container-fluid p-3">
   <h1>Calculate Deposit</h1>
+  <h2>목돈을 만들기 위해 일정 기간 동안 정해진 금액을 납입하는 방식입니다.</h2>
   <form id="depositForm">
     <div class="mb-3">
       <label for="amount" class="form-label">Principal Amount</label>
@@ -46,13 +47,6 @@
     <div class="mb-3">
       <label for="term" class="form-label">Number of Months</label>
       <input type="text" class="form-control" id="term" name="term">
-    </div>
-    <div class="mb-3">
-      <label for="interestType" class="form-label">Interest Type</label>
-      <select class="form-select" id="interestType" name="interestType">
-        <option value="simple">Simple Interest</option>
-        <option value="compound">Compound Interest</option>
-      </select>
     </div>
     <div class="mb-3">
       <label for="interestIncome" class="form-label">Interest Income</label>
@@ -83,7 +77,6 @@
         amount: $('#amount').val(),
         interestRate: $('#interestRate').val(),
         term: $('#term').val(),
-        interestType: $('#interestType').val(),
         interestIncome: $('#interestIncome').val()
       };
       $.ajax({

@@ -9,7 +9,6 @@ public class Deposit {
     private long amount;
     private int term;
     private double interestRate;
-    private String interestType;
     private String interestIncome;
 
 }
