@@ -22,15 +22,15 @@ public class SavingController {
         return "saving";
     }
 
-    @PostMapping("/beforeCalculate")
-    public ResponseEntity<Double> calculateBeforeSaving(@RequestBody Saving saving) {
-        double money = savingService.calculateBeforeSaving(saving);
+    @PostMapping("/calculate/before")
+    public ResponseEntity<String> calculateBeforeSaving(@RequestBody Saving saving) {
+        String money = savingService.calculateBeforeSaving(saving);
         return ResponseEntity.status(HttpStatus.OK).body(money);
     }
 
-    @PostMapping("/afterCalculate")
-    public ResponseEntity<Double> calculateAfterSaving(@RequestBody Saving saving) {
-        double money = savingService.calculateAfterSaving(saving);
+    @PostMapping("/calculate/after")
+    public ResponseEntity<String> calculateAfterSaving(@RequestBody Saving saving) {
+        String money = savingService.calculateAfterSaving(saving);
         return ResponseEntity.status(HttpStatus.OK).body(money);
     }
 }

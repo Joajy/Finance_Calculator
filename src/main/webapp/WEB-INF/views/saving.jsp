@@ -34,6 +34,7 @@
 </div>
 <div class="container-fluid p-3">
   <h1>Calculate Saving</h1>
+  <h2>목돈으로 이자 수익을 만들기 위해 은행에 해당 금액을 일정한 기간만큼 예치하는 방식입니다.</h2>
   <form id="savingForm">
     <div class="mb-3">
       <label for="amount" class="form-label">Principal Amount</label>
@@ -48,11 +49,18 @@
       <input type="text" class="form-control" id="term" name="term">
     </div>
     <div class="mb-3">
+      <label for="interestType" class="form-label">Interest Type</label>
+      <select class="form-select" id="interestType" name="interestType">
+        <option value="simple">Simple Interest</option>
+        <option value="compound">Compound Interest</option>
+      </select>
+    </div>
+    <div class="mb-3">
       <label for="interestIncome" class="form-label">Interest Income</label>
       <select class="form-select" id="interestIncome" name="interestIncome">
         <%--  일반 과세, 세금 우대   --%>
-        <option value="General Taxation">General Taxation</option>
-        <option value="Tax Break">Tax Break</option>
+        <option value="normal">General Taxation</option>
+        <option value="preferential">Tax Break</option>
       </select>
     </div>
     <button type="submit" class="btn btn-primary">Calculate</button>
@@ -76,16 +84,16 @@
         amount: $('#amount').val(),
         interestRate: $('#interestRate').val(),
         term: $('#term').val(),
+        interestType: $('#interestType').val(),
         interestIncome: $('#interestIncome').val()
       };
       $.ajax({
         type: 'POST',
-        url: '/saving/beforeCalculate',
+        url: '/saving/calculate/before',
         contentType: 'application/json',
         data: JSON.stringify(formData),
         success: function(result) {
-          $('#beforeResult').html('<br>' + '<p>Tax Type: ' + formData.interestIncome.valueOf() + '</p>' +
-                  '<p>Before Amount: ' + result + '</p>');
+          $('#beforeResult').html('<p>Before Amount: ' + result + '</p>');
         },
         error: function(error) {
           $('#beforeResult').html('<p>An error occurred</p>');
@@ -93,7 +101,7 @@
       });
       $.ajax({
         type: 'POST',
-        url: '/saving/afterCalculate',
+        url: '/saving/calculate/after',
         contentType: 'application/json',
         data: JSON.stringify(formData),
         success: function(result) {
