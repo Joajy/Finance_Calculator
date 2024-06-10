@@ -46,8 +46,8 @@
       <input type="text" class="form-control" id="interestRate" name="interestRate">
     </div>
     <div class="mb-3">
-      <label for="term" class="form-label">Number of Months</label>
-      <input type="text" class="form-control" id="term" name="term">
+      <label for="year" class="form-label">Number of Years</label>
+      <input type="text" class="form-control" id="year" name="year">
     </div>
     <div class="mb-3">
       <label for="interestIncome" class="form-label">Interest Income</label>
@@ -77,7 +77,7 @@
       const formData = {
         amount: $('#amount').val(),
         interestRate: $('#interestRate').val(),
-        term: $('#term').val(),
+        year: $('#year').val(),
         interestIncome: $('#interestIncome').val()
       };
       $.ajax({
