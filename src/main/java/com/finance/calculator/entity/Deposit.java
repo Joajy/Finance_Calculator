@@ -7,8 +7,12 @@ import lombok.Setter;
 public class Deposit {
 
     private long amount;
-    private int term;
+    private int year;
     private double interestRate;
+    private String interestType;
     private String interestIncome;
 
+    public double getAmount(int year) {
+        return amount * year * 12;
+    }
 }

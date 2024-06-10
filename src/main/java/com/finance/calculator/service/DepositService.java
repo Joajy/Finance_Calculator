@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import java.text.DecimalFormat;
 
 import static com.finance.calculator.constant.InterestIncome.*;
+import static com.finance.calculator.constant.InterestType.*;
 
 @Service
 public class DepositService {
@@ -13,21 +14,24 @@ public class DepositService {
     private static final DecimalFormat format = new DecimalFormat("###,###");
 
     public String calculateBeforeDeposit(Deposit deposit) {
-        double principal = deposit.getAmount();
+        int year = deposit.getYear();
+        double principal = deposit.getAmount(year);
         double rate = deposit.getInterestRate() / 100;
-        int year = deposit.getTerm();
-        long total = (long) (principal * Math.pow(1 + rate, year));
+        String interestType = deposit.getInterestType();
+        long total = (long) (principal * appliedInterest(interestType, rate, year)
+        );
         return format.format(total);
     }
 
     public String calculateAfterDeposit(Deposit deposit) {
-        double principal = deposit.getAmount();
+        int year = deposit.getYear();
+        double principal = deposit.getAmount(year);
         double rate = deposit.getInterestRate() / 100;
-        int year = deposit.getTerm();
         String interestIncome = deposit.getInterestIncome();
+        String interestType = deposit.getInterestType();
         long total = (long) (principal
-                * Math.pow(1 + rate, year)
                 * type(interestIncome)
+                * appliedInterest(interestType, rate, year)
         );
         return format.format(total);
     }

@@ -38,7 +38,7 @@
   <h2>적금: 목돈을 만들기 위해 일정 기간 동안 정해진 금액을 납입하는 방식입니다.</h2>
   <form id="depositForm">
     <div class="mb-3">
-      <label for="amount" class="form-label">Principal Amount</label>
+      <label for="amount" class="form-label">Monthly Amount</label>
       <input type="text" class="form-control" id="amount" name="amount">
     </div>
     <div class="mb-3">
@@ -48,6 +48,13 @@
     <div class="mb-3">
       <label for="year" class="form-label">Number of Years</label>
       <input type="text" class="form-control" id="year" name="year">
+    </div>
+    <div class="mb-3">
+      <label for="interestType" class="form-label">Interest Type</label>
+      <select class="form-select" id="interestType" name="interestType">
+        <option value="simple">Simple Interest</option>
+        <option value="compound">Compound Interest</option>
+      </select>
     </div>
     <div class="mb-3">
       <label for="interestIncome" class="form-label">Interest Income</label>
@@ -78,6 +85,7 @@
         amount: $('#amount').val(),
         interestRate: $('#interestRate').val(),
         year: $('#year').val(),
+        interestType: $('#interestType').val(),
         interestIncome: $('#interestIncome').val()
       };
       $.ajax({
