@@ -23,8 +23,12 @@ public class LoanType {
     //수정 필요
     private static double epa(double rate, int year) {
         double monthlyRate = rate / 12;
-        int month = year * 12;
-        return (1 / month) + monthlyRate;
+        int months = year * 12;
+        double totalPayment = 0;
+        for (int i = 0; i < months; i++) {
+            totalPayment += (1.0 / months + monthlyRate);
+        }
+        return totalPayment / months;
     }
 
     private static double bullet(double rate, int year) {
