@@ -53,7 +53,10 @@
       <label for="interestType" class="form-label">Interest Type</label>
       <select class="form-select" id="interestType" name="interestType">
         <option value="simple">Simple Interest</option>
-        <option value="compound">Compound Interest</option>
+        <option value="yearCompound">Compound Interest</option>
+        <option value="sixMonthCompound">6 Months Compound Interest</option>
+        <option value="threeMonthCompound">3 Months Compound Interest</option>
+        <option value="everyMonthCompound">Monthly Compound Interest</option>
       </select>
     </div>
     <div class="mb-3">
@@ -117,4 +120,3 @@
   });
 </script>
 </body>
-</html>

@@ -30,9 +30,9 @@ public class SavingService {
         int year = saving.getYear();
         String interestIncome = saving.getInterestIncome();
         String interestType = saving.getInterestType();
-        long total = (long) (principal
-                * appliedInterest(interestType, rate, year)
-                * type(interestIncome)
+        long interest = (long)(principal * appliedInterest(interestType, rate, year) - principal);
+        long total = (long) (
+                principal + interest * type(interestIncome)
         );
         return format.format(total);
     }
