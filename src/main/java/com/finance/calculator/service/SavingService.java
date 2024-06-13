@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import java.text.DecimalFormat;
 
 import static com.finance.calculator.constant.InterestIncome.type;
-import static com.finance.calculator.constant.InterestType.appliedInterest;
+import static com.finance.calculator.constant.InterestType.savingAppliedInterest;
 
 @Service
 public class SavingService {
@@ -19,7 +19,7 @@ public class SavingService {
         int year = saving.getYear();
         String interestType = saving.getInterestType();
         long total = (long) (principal
-                * appliedInterest(interestType, rate, year)
+                * savingAppliedInterest(interestType, rate, year)
         );
         return format.format(total);
     }
@@ -30,7 +30,7 @@ public class SavingService {
         int year = saving.getYear();
         String interestIncome = saving.getInterestIncome();
         String interestType = saving.getInterestType();
-        long interest = (long)(principal * appliedInterest(interestType, rate, year) - principal);
+        long interest = (long)(principal * savingAppliedInterest(interestType, rate, year) - principal);
         long total = (long) (
                 principal + interest * type(interestIncome)
         );
