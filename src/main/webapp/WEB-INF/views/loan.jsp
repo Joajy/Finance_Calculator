@@ -85,7 +85,12 @@
         contentType: 'application/json',
         data: JSON.stringify(formData),
         success: function(result) {
-          $('#result').html('<p>Before Amount: ' + result + '</p>');
+            if(formData.loanType === 'bullet'){
+                $('#result').html('<p>Monthly Paid Result: ' + result + '</p>'
+                + '<p> Last Month Paid Principal: ' + formData.amount + '</p>');
+            } else {
+                $('#result').html('<p>Monthly Paid Result: ' + result + '</p>');
+            }
         },
         error: function(error) {
           $('#result').html('<p>An error occurred</p>');
