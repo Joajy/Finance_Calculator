@@ -17,10 +17,7 @@ public class LoanService {
         double rate = loan.getInterestRate() / 100;
         int year = loan.getYear();
         String loanType = loan.getLoanType();
-        long total = (long) (principal + principal
-                * selectLoanType(loanType, rate, year)
-//                * appliedInterest(interestType, rate, year)
-        );
+        long total = (long) (principal * selectLoanType(loanType, rate, year));
         return format.format(total);
     }
 }
