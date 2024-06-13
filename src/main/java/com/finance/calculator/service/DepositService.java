@@ -15,11 +15,9 @@ public class DepositService {
 
     public String calculateBeforeDeposit(Deposit deposit) {
         int year = deposit.getYear();
-        double principal = deposit.getAmount(year);
         double rate = deposit.getInterestRate() / 100;
         String interestType = deposit.getInterestType();
-        long total = (long) (principal * appliedInterest(interestType, rate, year)
-        );
+        long total = (long) (deposit.getAmount() * depositAppliedInterest(interestType, rate, year));
         return format.format(total);
     }
 
@@ -29,10 +27,8 @@ public class DepositService {
         double rate = deposit.getInterestRate() / 100;
         String interestIncome = deposit.getInterestIncome();
         String interestType = deposit.getInterestType();
-        long total = (long) (principal
-                * type(interestIncome)
-                * appliedInterest(interestType, rate, year)
-        );
+        double interest = deposit.getAmount() * depositAppliedInterest(interestType, rate, year) - principal;
+        long total = (long) (principal + interest * type(interestIncome));
         return format.format(total);
     }
 
