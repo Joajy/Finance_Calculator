@@ -4,13 +4,9 @@ import com.finance.calculator.entity.Loan;
 import com.finance.calculator.service.LoanService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/loan")
 public class LoanController {
 
@@ -18,11 +14,6 @@ public class LoanController {
 
     public LoanController(LoanService loanService) {
         this.loanService = loanService;
-    }
-
-    @GetMapping
-    public String loan(){
-        return "loan";
     }
 
     @PostMapping("/calculate")

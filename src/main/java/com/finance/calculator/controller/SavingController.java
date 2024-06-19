@@ -4,10 +4,9 @@ import com.finance.calculator.entity.Saving;
 import com.finance.calculator.service.SavingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/saving")
 public class SavingController {
 
@@ -15,11 +14,6 @@ public class SavingController {
 
     public SavingController(SavingService savingService) {
         this.savingService = savingService;
-    }
-
-    @GetMapping
-    public String saving(){
-        return "saving";
     }
 
     @PostMapping("/calculate/before")
