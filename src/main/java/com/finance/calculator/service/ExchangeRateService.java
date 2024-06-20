@@ -1,7 +1,8 @@
 package com.finance.calculator.service;
 
-import java.math.BigDecimal;
+import com.finance.calculator.entity.ExchangeRate;
+
 
 public interface ExchangeRateService {
-    BigDecimal getExchangeRate(String country);
+    Double getExchangeRate(ExchangeRate exchangeRate);
 }

@@ -1,5 +1,6 @@
 package com.finance.calculator.service;
 
+import com.finance.calculator.entity.ExchangeRate;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.NumberFormat;
@@ -25,7 +25,7 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
     private String apiKey;
 
     @Override
-    public BigDecimal getExchangeRate(String country) {
+    public Double getExchangeRate(ExchangeRate exchangeRate) {
         BufferedReader reader;
         String line;
         StringBuilder responseContent = new StringBuilder();
@@ -34,7 +34,7 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
         String authKey = apiKey;
         String searchDate = new SimpleDateFormat("yyyyMMdd").format(new Date());
         String dataType = "AP01";   //Request -> String:AP01(환율)
-        BigDecimal exchangeRate = null;
+        Double totalAmount = null;
         HttpURLConnection connection = null;
 
         try {
@@ -43,7 +43,7 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
             connection = (HttpURLConnection) url.openConnection();
 
             // Request 초기 세팅
-            connection.setRequestMethod("GET");
+            connection.setRequestMethod("POST");
             connection.setConnectTimeout(5000);
             connection.setReadTimeout(5000);
 
@@ -65,11 +65,13 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
                     // 선택한 금액에 대해 KRW와 비교하여 환율 정보 조회
                     for (Object o : exchangeRateInfoList) {
                         JSONObject exchangeRateInfo = (JSONObject) o;
-                        if (exchangeRateInfo.get("cur_unit").equals(country)) {
+                        System.out.println(exchangeRateInfo.get("cur_unit") + " " + exchangeRateInfo.get("ttb"));
+                        if (exchangeRateInfo.get("cur_unit").equals(exchangeRate.getCurrencies())) {
 
-                            // 쉼표가 포함되어 String 형태로 들어오는 데이터를 Double로 파싱하기 위한 부분
+                            // 쉼표가 포함되어 String 형태로 들어오는 데이터를 값으로 파싱하기 위한 부분
                             NumberFormat format = NumberFormat.getInstance(Locale.getDefault());
-                            exchangeRate = BigDecimal.valueOf(format.parse(exchangeRateInfo.get("deal_bas_r").toString()).doubleValue());
+//                            exchangeRate = BigDecimal.valueOf(format.parse(exchangeRateInfo.get("deal_bas_r").toString()).doubleValue());
+                            totalAmount = format.parse(exchangeRateInfo.get("deal_bas_r").toString()).doubleValue() * exchangeRate.getAmount();
                         }
                     }
                 }
@@ -83,10 +85,10 @@ public class ExchangeRateServiceImpl implements ExchangeRateService {
             connection.disconnect();
         }
 
-        if (exchangeRate == null) {
-            exchangeRate = BigDecimal.valueOf(1);
+        if (totalAmount == null) {
+            totalAmount = (double) exchangeRate.getAmount();
         }
 
-        return exchangeRate;
+        return totalAmount;
     }
 }

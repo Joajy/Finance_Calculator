@@ -21,4 +21,8 @@ public class PageController {
         return "saving";
     }
 
+    @GetMapping("/exchange")
+    public String exchange(){
+        return "exchange";
+    }
 }
