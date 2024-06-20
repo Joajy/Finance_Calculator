@@ -31,6 +31,9 @@
     <li class="nav-item">
       <a class="nav-link" href="/loan">Loan</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link active" href="/exchange">Exchange Rate</a>
+    </li>
   </ul>
 </div>
 <div class="container-fluid p-3">
